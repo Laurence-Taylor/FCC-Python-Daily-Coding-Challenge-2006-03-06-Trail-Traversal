@@ -1,5 +1,5 @@
 def navigate_trail(map):
-
+    # This is a very large and complicated way to resolve the problem... I have to improve it....
     def find_start_pos(matrix_map):
         found = False
         rows = len(matrix_map)
@@ -22,7 +22,7 @@ def navigate_trail(map):
     prev_row = -1
     is_the_end = False
     while not is_the_end:
-        if pos_row - 1 >= 0 and pos_row-1 != prev_row: 
+        if pos_row - 1 >= 0 and pos_row-1 != prev_row and not is_the_end: 
             if matrix_map[pos_row - 1][pos_col] == 'T': 
                 path += 'U'
                 prev_row = pos_row
@@ -32,7 +32,7 @@ def navigate_trail(map):
                 path += 'U'
                 is_the_end = True
                 pos_row -= 1
-        if pos_row + 1 < rows and pos_row+1 != prev_row: 
+        if pos_row + 1 < rows and pos_row+1 != prev_row and not is_the_end: 
             if matrix_map[pos_row + 1][pos_col] == 'T': 
                 path += 'D'
                 prev_row = pos_row
@@ -42,7 +42,7 @@ def navigate_trail(map):
                 path += 'D'
                 is_the_end = True
                 pos_row += 1
-        if pos_col - 1 >= 0 and prev_col != pos_col-1: 
+        if pos_col - 1 >= 0 and prev_col != pos_col-1 and not is_the_end: 
             if matrix_map[pos_row][pos_col - 1] == 'T': 
                 path += 'L'
                 prev_col = pos_col
@@ -52,7 +52,7 @@ def navigate_trail(map):
                 path += 'L'
                 is_the_end = True
                 pos_col -= 1
-        if pos_col + 1 < cols and prev_col != pos_col+1: 
+        if pos_col + 1 < cols and prev_col != pos_col+1 and not is_the_end: 
             if matrix_map[pos_row][pos_col + 1] == 'T': 
                 path += 'R'
                 prev_col = pos_col
@@ -63,17 +63,15 @@ def navigate_trail(map):
                 is_the_end = True
                 pos_col += 1
 
-    print(path)
-
-    return map
+    return path
 
 if __name__ == '__main__':
-    #print(navigate_trail(["-CT--", "--T--", "--TT-", "---T-", "---G-"]))
+    print(navigate_trail(["-CT--", "--T--", "--TT-", "---T-", "---G-"]))
     print('-----')
-    #print(navigate_trail(["-----", "--TTG", "--T--", "--T--", "CTT--"]))
+    print(navigate_trail(["-----", "--TTG", "--T--", "--T--", "CTT--"]))
     print('-----')
-    #print(navigate_trail(["-C----", "TT----", "T-----", "TTTTT-", "----G-"]))
+    print(navigate_trail(["-C----", "TT----", "T-----", "TTTTT-", "----G-"]))
     print('-----')
     print(navigate_trail(["--------", "-CTTT---", "----T---", "---GT---", "--------"]))
     print('-----')
-    #print(navigate_trail(["TTTTTTT-", "T-----T-", "T-----T-", "TTTT--TG", "---C----"]))
+    print(navigate_trail(["TTTTTTT-", "T-----T-", "T-----T-", "TTTT--TG", "---C----"]))
